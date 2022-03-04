@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Program</title>
+</head>
+
+<body>
+
+    <div class="heading">
+        <h2>DSA PROGRAM</h2>
+    </div>
+
+    <div class="index">
+        <ul>
+            <a href="#program5a">
+                <li>Program 5a</li>
+            </a>
+            <a href="#program5b">
+                <li>Program 5b</li>
+            </a>
+            <a href="#program6">
+                <li>Program 6</li>
+            </a>
+            <a href="#program7">
+                <li>Program 7</li>
+            </a>
+            <a href="#program8">
+                <li>Program 8</li>
+            </a>
+            <a href="#program9">
+                <li>Program 9</li>
+            </a>
+            <a href="#program10">
+                <li>Program 10</li>
+            </a>
+            <a href="#program11">
+                <li>Program 11</li>
+            </a>
+            <a href="#program12">
+                <li>Program 12</li>
+            </a>
+        </ul>
+    </div>
+    <section id="program5a">
+        <h1>Program 5a</h1>
+
+        <pre>
+                #include<span><</span><span>stdio.h</span><span>></span>
+                #include<span><</span><span>math.h</span><span>></span>
+                #include<span><</span><span>string.h</span><span>></span>
+                #include<span><</span><span>ctype.h</span><span>></span>
+                #include<span><</span><span>process.h</span><span>></span>
+                double compute(char symbol, double op1, double op2)
+                {
+                switch(symbol)
+                {
+                case '+': return op1+op2; /* Perform addition */
+                case '-': return op1-op2; /* Perform subtraction */
+                case '*': return op1*op2; /* Perform multiplaction */
+                case '/': return op1/op2; /* Perform division */
+                case '%': return op1%op2; /* Perform division and gives reminder */
+                case '$':
+                case '^': return pow(op1,op2); /* Compute power */
+                }
+                }
+                int main( )
+                {
+                double s[20]; /* Place for stack elements */
+                double res; /* Holds partial or final result */
+                double op1; /* First operand */
+                double op2; /* Second operand */
+                int top; /* Points to the topmost element */
+                int i; /* Index value */
+                char postfix[20]; /* Input expression */
+                char symbol; /* Scanned postfix symbol */
+                printf("Enter the postfix expression\n");
+                scanf("%s",postfix);
+                top=-1;
+                for(i=0; <span>i</span><span><</span><span>strlen(postfix);</span> i++)
+                {
+                symbol=postfix[i]; 
+                if(isdigit(symbol)) 
+                s[++top]=symbol-'0';
+                else
+                {
+                op2=s[top--]; 
+                op1=s[top--];
+              
+                res=compute(symbol,op1,op2);
+              
+                s[++top]=res;
+
+                }
+                }
+                res=s[top--];
+                printf("the result is %f\n”,res);
+                return 0;
+                }
+        </pre>
+
+    </section>
+
+    <section id="program5b">
+        <h1>Program 5b</h1>
+
+        <pre>
+                #include<span><</span><span>stdio.h</span><span>></span>
+                void towers(int, char, char, char);
+                int main( )
+                {
+                int num;
+                printf("Enter the number of disks : ");
+                scanf("%d", &num);
+                printf("The sequence of moves involved in the Tower of Hanoi are :\n");
+                towers(num, 'A', 'B', 'C');
+                return 0;
+                }
+                void towers(int n, char source, char temp, char dest)
+                {
+                if (n == 1)
+                {
+                printf(" Move disk 1 from peg %c to peg %c\n”, source, dest);
+                return;
+                }
+                towers(n - 1, source, dest, temp);
+                printf(" Move disk %d from peg %c to peg %c\n”, n, source, dest);
+                towers(n - 1, temp, source, dest);
+                }
+        </pre>
+
+    </section>
+
+    <section id="program6">
+        <h1>Program 6</h1>
+
+        <pre>
+                #include<span><</span><span>stdio.h</span><span>></span>
+                #include<span><</span><span>stdlib.h</span><span>></span>
+                #define QSIZE 4
+                char q[5], item;
+                int r=-1, f=0, count=0;
+                /* Insert Operation */
+                void insert( )
+                {
+                /* Check for queue overflow */
+                if(count == QSIZE)
+                {
+                printf("Queue Overflow\n");
+                return;
+                }
+                r = (r+1) % QSIZE; /* Increment rear by 1 */
+                q[r] = item; /* Insert into queue */
+                count++;
+                }
+                /* Delete Operation */
+                void del( )
+                {
+                /* Check for Queue Underflow */
+                if(count == 0)
+                {
+                printf("Queue Underflow\n");
+                return;
+                }
+                printf("The item deleted is: %c\n", q[f]);
+                f = (f+1) % QSIZE;
+                count--;
+                }
+                /* Display Operation */
+                void display(int front)
+                {
+                int i;
+                /* Check for Empty Queue */
+                if(count == 0)
+                {
+                printf("Queue is Empty\n");
+                return;
+                }
+                /* Display the contents of the queue */
+                printf("Contents of the queue\n");
+                for(i=1; i<samp><</samp>=count; i++)
+                {
+                printf("%c\n",q[front]);
+                front = (front+1) % QSIZE;
+                }
+                }
+                int main( )
+                {
+                int choice;
+                do
+                {
+                printf("***********************\n");
+                printf("Circular Queue Operations\n");
+                printf("1. Insert\n");
+                printf("2. Delete\n");
+                printf("3. Display\n");
+                printf("4. Quit\n");
+                printf("Enter your choice:\n");
+                scanf("%d",&choice);
+                switch(choice)
+                {
+                case 1: printf("Enter the item to be inserted\n");
+                scanf(“ %c",&item);
+                insert( );
+                break;
+                case 2: del( );
+                break;
+                case 3: display(f);
+                break;
+                case 4: exit(0);
+                default:printf("Invalid choice\n");
+                }
+                }while(choice!=4);
+                return 0;
+                }
+        </pre>
+
+    </section>
+
+    <section id="program7">
+        <h1>Program 7</h1>
+
+        <pre>
+                #include<span><</span><span>stdio.h</span><span>></span>
+                #include<span><</span><span>stdlib.h</span><span>></span>
+                #include<span><</span><span>string.h</span><span>></span>
+                int count=0;
+                struct node
+                {
+                int sem, phno;
+                char name[20], branch[10], usn[20];
+                struct node *next;
+                }*first=NULL,*last=NULL,*temp=NULL, *temp1;
+                void create( )
+                {
+                int sem, phno;
+                char name[20],branch[10],usn[20];
+                temp=(struct node*)malloc(sizeof(struct node));
+                printf("\n Enter USN, NAME, BRANCH, SEMESTER, PHNUM of student : ");
+                scanf("%s %s %s %d %d", usn, name, branch, &sem,&phno);
+                strcpy(temp->usn, usn);
+                strcpy(temp->name, name);
+                strcpy(temp->branch, branch);
+                temp->sem = sem;
+                temp->phno = phno;
+                temp->next=NULL;
+                count++;
+                }
+                void insert_atfirst( )
+                {
+                if (first == NULL)
+                {
+                create( );
+                first = temp;
+                last = first;
+                }
+                else
+                {
+                create( );
+                temp->next = first;
+                first = temp;
+                }
+                }
+                void insert_atlast( )
+                {
+                if(first==NULL)
+                {
+                create( );
+                first = temp;
+                last = first;
+                }
+                else
+                {
+                create( );
+                last->next = temp;
+                last = temp;
+                }
+                }
+                void display( )
+                {
+                temp1=first;
+                if(temp1 == NULL)
+                {
+                printf("List empty to display \n");
+                return;
+                }
+                printf("\n Linked list elements from begining : \n");
+                printf("USN\t NAME\t BRANCH\t SEMESTER\t PH.NUM\n");
+                while (temp1!= NULL)
+                {
+                printf("%s\t %s\t %s\t %d\t\t %d\n", temp1->usn, temp1->name,temp1->branch,temp1->sem,temp1->phno);
+                temp1 = temp1->next;
+                }
+                printf(" No of students = %d ", count);
+                }
+                void delete_end( )
+                {
+                struct node *temp;
+                temp=first;
+                if(first==NULL) /* List is Empty */
+                {
+                printf("List is Empty\n");
+                return;
+                }
+                if(temp->next==NULL) /* If only there is one node in the List */
+                {
+                printf("%s %s %s %d %d\n", temp->usn, temp->name,temp->branch, temp->sem, temp->phno );
+                free(temp);
+                first=NULL;
+                }
+                else /* If more than one node in the List */
+                {
+                while(temp->next!=last)
+                temp=temp->next;
+                printf("%s %s %s %d %d\n", last->usn, last->name,last->branch, last->sem, last->phno );
+                free(last);
+                temp->next=NULL;
+                last=temp;
+                }
+                count--;
+                }
+                void delete_front( )
+                {
+                struct node *temp;
+                temp=first;
+                if(first==NULL) /* List is Empty */
+                {
+                printf("List is Empty\n");
+                return;
+                }
+                if(temp->next==NULL) /* If only there is one node in the List */
+                {
+                printf("%s %s %s %d %d\n", temp->usn, temp->name,temp->branch, temp->sem, temp->phno );
+                free(temp);
+                first=NULL;
+                }
+                else /* If more than one node in the List */
+                {
+                first=temp->next;
+                printf("%s %s %s %d %d", temp->usn, temp->name,temp->branch,temp->sem, temp->phno );
+                free(temp);
+                }
+                count--;
+                }
+                int main( )
+                {
+                int ch, n, i;
+                first=NULL;
+                temp = temp1 = NULL;
+                printf("-----------------MENU----------------------\n");
+                printf("\n 1 Create a SLL of n Employees");
+                printf("\n 2 - Display from beginning");
+                printf("\n 3 - Insert at end");
+                printf("\n 4 - delete at end");
+                printf("\n 5 - Insert at beg");
+                printf("\n 6 - delete at beg");
+                printf("\n 7 - exit\n");
+                printf("-------------------------------------------\n");
+                while (1)
+                {
+                printf("\n Enter choice : ");
+                scanf("%d", &ch);
+                switch (ch)
+                {
+                case 1: printf("\n Enter no of students : ");
+                scanf("%d", &n);
+                for(i=0;i<samp><</samp>n;i++)
+                insert_atfirst();
+                break;
+                case 2: display( );
+                break;
+                case 3: insert_atlast( );
+                break;
+                case 4: delete_end( );
+                break;
+                case 5: insert_atfirst( );
+                break;
+                case 6: delete_front( );
+                break;
+                case 7: exit(0);
+                default:printf("Wrong Choice\n");
+                }
+                }
+                return 0;
+                }
+        </pre>
+
+    </section>
+
+    <section id="program8">
+        <h1>Program 8</h1>
+
+        <pre>
+                #include<span><</span><span>stdio.h</span><span>></span>
+                #include<span><</span><span>stdlib.h</span><span>></span>
+                #include<span><</span><span>string.h</span><span>></span>
+                int count=0;
+                struct node
+                {
+                struct node *prev;
+                int ssn, phno;
+                float sal;
+                char name[20],dept[10],desg[20];
+                struct node *next;
+                }*first,*temp,*last;
+                void create( )
+                {
+                int ssn,phno;
+                float sal;
+                char name[20],dept[10],desg[20];
+                temp =(struct node *)malloc(sizeof(struct node));
+                temp->prev = NULL;
+                temp->next = NULL;
+                printf("\n Enter ssn,name,department, designation, salary and phno of employee : ");
+                scanf("%d %s %s %s %f %d", &ssn, name, dept, desg, &sal, &phno);
+                temp->ssn = ssn;
+                strcpy(temp->name,name);
+                strcpy(temp->dept,dept);
+                strcpy(temp->desg,desg);
+                temp->sal = sal;
+                temp->phno = phno;
+                count++;
+                }
+                void display( )
+                {
+                temp = first;
+                if(temp == NULL)
+                {
+                printf("List is Empty\n");
+                return;
+                }
+                printf("\n Linked list elements from begining : \n");
+                while (temp != NULL)
+                {
+                printf("%d %s %s %s %f %d\n", temp->ssn, temp->name,temp->dept,temp->desg,temp->sal, temp->phno );
+                temp = temp->next;
+                }
+                printf(" No of employees = %d", count);
+                }
+                void insert_front( )
+                {
+                if (first == NULL)
+                {
+                create( );
+                first = temp;
+                last = first;
+                }
+                else
+                {
+                create( );
+                temp->next = first;
+                first->prev = temp;
+                first = temp;
+                }
+                }
+                void delete_front( )
+                {
+                struct node *cur=first;
+                if(first == NULL) /* If the List is Empty */
+                {
+                printf("List is Empty\n");
+                return;
+                }
+                if(first->next == NULL) /*If there is only one node in the List */
+                {
+                printf("%d %s %s %s %f %d\n", first->ssn, first->name,first->dept, first->desg,first->sal, first->phno );
+                free(first);
+                first = NULL;
+                }
+                else
+                {
+                first = first->next;
+                printf("%d %s %s %s %f %d", cur->ssn, cur->name,cur->dept, cur->desg,cur->sal, cur->phno );
+                free(cur);
+                }
+                count--;
+                }
+                void insert_rear( )
+                {
+                if(first == NULL)
+                {
+                create( );
+                first = temp;
+                last = first;
+                }
+                else
+                {
+                create( );
+                last->next = temp;
+                temp->prev = last;
+                last = temp;
+                }
+                }
+                void delete_rear( )
+                {
+                if(first == NULL) /*If the list is Empty */
+                {
+                printf("List is Empty\n");
+                return;
+                }
+                if(first->next == NULL) /*If there is only one node in the List */
+                {
+                printf("%d %s %s %s %f %d\n", first->ssn, first->name,first->dept, first->desg,first->sal, first->phno );
+                free(first);
+                first = NULL;
+                }
+                else
+                {
+                temp = last->prev;
+                temp->next = NULL;
+                printf("%d %s %s %s %f %d\n", last->ssn, last->name,last->dept, last->desg,last->sal, last->phno );
+                free(last);
+                last=temp;
+                }
+                count--;
+                }
+                int main( )
+                {
+                int ch,n,i;
+                first = NULL;
+                temp = last = NULL;
+                printf("-----------------MENU--------------------\n");
+                printf("\n 1 - Create a DLL of n emp");
+                printf("\n 2 - Display from beginning");
+                printf("\n 3 - Insert at front end");
+                printf("\n 4 - Delete at front end");
+                printf("\n 5 - Insert at rear end");
+                printf("\n 6 - Delete at rear end");
+                printf("\n 7 - Exit\n");
+                printf("------------------------------------------\n");
+                while (1)
+                {
+                printf("\n Enter Choice : ");
+                scanf("%d", &ch);
+                switch (ch)
+                {
+                case 1: printf("\n Enter no of employees : ");
+                scanf("%d", &n);
+                for(i=0;i<samp><</samp>n;i++)
+                insert_rear( );
+                break;
+                case 2: display( );
+                break;
+                case 3: insert_front( );
+                break;
+                case 4: delete_front( );
+                break;
+                case 5: insert_rear( );
+                break;
+                case 6: delete_rear( );
+                break;
+                case 7: exit(0);
+                default:printf("Wrong Choice\n");
+                }
+                }
+                return 0;
+                }  
+        </pre>
+
+    </section>
+
+    <section id="program9">
+        <h1>Program 9</h1>
+
+        <pre>
+                #include<span><</span><span>stdio.h</span><span>></span>
+                #include<span><</span><span>math.h</span><span>></span>
+                #include<span><</span><span>string.h</span><span>></span>
+                struct node
+                {
+                int cf, px, py, pz;
+                int flag;
+                struct node *link;
+                };
+                typedef struct node NODE;
+                NODE* getnode( )
+                {
+                NODE *x;
+                x = (NODE*)malloc(sizeof(NODE));
+                if(x == NULL)
+                {
+                printf("Insufficient memory\n");
+                exit(0);
+                }
+                return x;
+                }
+                void display(NODE *head)
+                {
+                NODE *temp;
+                if(head->link == head)
+                {
+                printf("Polynomial does not exist\n");
+                return;
+                }
+                temp = head->link;
+                printf("\n");
+                while(temp != head)
+                {
+                printf("%d x^%d y^%d z^%d",temp->cf,temp->px,temp->py,temp->pz);
+                if(temp->link != head)
+                printf(" + ");
+                temp = temp->link;
+                }
+                printf("\n");
+                }
+                NODE* insert_rear(int cf,int x,int y,int z,NODE *head)
+                {
+                NODE *temp, *cur;
+                temp = getnode( );
+                temp->cf = cf;
+                temp->px = x;
+                temp->py = y;
+                temp->pz = z;
+                cur = head->link;
+                while(cur->link != head)
+                cur = cur->link;
+                cur->link = temp;
+                temp->link = head;
+                return head;
+                }
+                NODE* read_poly(NODE *head)
+                {
+                int px, py, pz, cf, ch;
+                printf("\nEnter coeff: ");
+                scanf("%d",&cf);
+                printf("\nEnter x, y, z powers(0-indiacate NO term): ");
+                scanf("%d%d%d", &px, &py, &pz);
+                head = insert_rear(cf,px,py,pz,head);
+                printf("\nIf you wish to continue press 1 otherwise 0: ");
+                scanf("%d", &ch);
+                while(ch != 0)
+                {
+                printf("\nEnter coeff: ");
+                scanf("%d",&cf);
+                printf("\nEnter x, y, z powers(0-indiacate NO term): ");
+                scanf("%d%d%d",&px, &py, &pz);
+                head = insert_rear(cf,px,py,pz,head);
+                printf("\nIf you wish to continue press 1 otherwise 0: ");
+                scanf("%d", &ch);
+                }
+                return head;
+                }
+                NODE* add_poly(NODE *h1,NODE *h2,NODE *h3)
+                {
+                NODE *p1, *p2;
+                int cf;
+                p1 = h1->link;
+                while(p1 != h1)
+                {
+                p2=h2->link;
+                while(p2 != h2)
+                {
+                if(p1->px == p2->px && p1->py == p2->py && p1->pz == p2->pz)
+                break;
+                p2 = p2->link;
+                }
+                if(p2 != h2)
+                {
+                cf = p1->cf + p2->cf;
+                p2->flag = 1;
+                if(cf != 0)
+                h3 = insert_rear(cf,p1->px,p1->py,p1->pz,h3);
+                }
+                else
+                h3 = insert_rear(p1->cf,p1->px,p1->py,p1->pz,h3);
+                p1 = p1->link;
+                }
+                p2 = h2->link;
+                while(p2 != h2)
+                {
+                if(p2->flag == 0)
+                h3 = insert_rear(p2->cf,p2->px,p2->py,p2->pz,h3);
+                p2 = p2->link;
+                }
+                return h3;
+                }
+                void evaluate(NODE *head)
+                {
+                NODE *h1=head->link;
+                int x, y, z;
+                float result = 0.0;
+                printf("\nEnter x, y, z, terms to evaluate:\n");
+                scanf("%d%d%d", &x, &y, &z);
+                while(h1 != head)
+                {
+                result = result + (h1->cf * pow(x,h1->px) * pow(y,h1->py) * pow(z,h1->pz));
+                h1 = h1->link;
+                }
+                printf("\nPolynomial result is: %f", result);
+                }
+                int main( )
+                {
+                NODE *h1, *h2, *h3, *eval;
+                int ch;
+                while(1)
+                {
+                eval = getnode( );
+                h1 = getnode( );
+                h2 = getnode( );
+                h3 = getnode( );
+                eval->link = eval;
+                h1->link = h1;
+                h2->link = h2;
+                h3->link = h3;
+                printf("\n\n1.Evaluate polynomial\n2.Add two polynomials\n3.Exit\n");
+                printf("Enter your choice: ");
+                scanf("%d", &ch);
+                switch(ch)
+                {
+                case 1: printf("\nEnter polynomial to evaluate:\n");
+                eval = read_poly(eval);
+                display(eval);
+                evaluate(eval);
+                free(eval);
+                break;
+                case 2: printf("\nEnter the first polynomial: ");
+                h1 = read_poly(h1);
+                printf("Flag = %d\n",h1->flag);
+                printf("\nEnter the second polynomial: ");
+                h2 = read_poly(h2);
+                h3 = add_poly(h1,h2,h3);
+                printf("\nFirst polynomial is: ");
+                display(h1);
+                printf("\nSecond polynomial is: ");
+                display(h2);
+                printf("\nThe sum of 2 polynomials is: ");
+                display(h3);
+                free(h1); free(h2); free(h3);
+                break;
+                case 3: exit(0);
+                break;
+                default:printf("\nInvalid entry");
+                }
+                }
+                return 0;
+                }
+        </pre>
+
+    </section>
+
+    <section id="program10">
+        <h1>Program 10</h1>
+
+        <pre>
+                #include<span><</span><span>stdio.h</span><span>></span>
+                #include<span><</span><span>stdlib.h</span><span>></span>
+                struct BST
+                {
+                int data;
+                struct BST *left;
+                struct BST *right;
+                };
+                typedef struct BST NODE;
+                NODE* createtree(NODE *root, int data)
+                {
+                if (root == NULL)
+                {
+                NODE *temp;
+                temp = (NODE*) malloc (sizeof(NODE));
+                temp->data = data;
+                temp->left = temp->right = NULL;
+                return temp;
+                }
+                if (data <samp><</samp> (root->data))
+                root->left = createtree(root->left, data);
+                else if (data > root->data)
+                root -> right = createtree(root->right, data);
+                return root;
+                }
+                void inorder(NODE *root)
+                {
+                if(root != NULL)
+                {
+                inorder(root->left);
+                printf("%d\t", root->data);
+                inorder(root->right);
+                }
+                }
+                void preorder(NODE *root)
+                {
+                if(root != NULL)
+                {
+                printf("%d\t", root->data);
+                preorder(root->left);
+                preorder(root->right);
+                }
+                }
+                void postorder(NODE *root)
+                {
+                if(root != NULL)
+                {
+                postorder(root->left);
+                postorder(root->right);
+                printf("%d\t", root->data);
+                }
+                }
+                NODE *search(NODE *root, int data)
+                {
+                if(root == NULL)
+                printf("\nElement not found");
+                else if(data <samp><</samp> root->data)
+                root->left = search(root->left, data);
+                else if(data > root->data)
+                root->right = search(root->right, data);
+                else
+                printf("\nElement found is: %d", root->data);
+                return root;
+                }
+                int main( )
+                {
+                int data, ch, i, n;
+                NODE *root = NULL;
+                while (1)
+                {
+                printf("\n1.Creation of Binary Search Tree");
+                printf("\n2.Inorder\n3.Preorder\n4.Postorder\n5.Search\n6.Exit");
+                printf("\nEnter your choice: ");
+                scanf("%d", &ch);
+                switch (ch)
+                {
+                case 1: printf("\nEnter N value: " );
+                scanf("%d", &n);
+                printf("\nEnter the values to create BST like(6,9,5,2,8,15,24,14,7,8,5,2)\n");
+                for(i=0; i<samp><</samp>n; i++)
+                {
+                scanf("%d", &data);
+                root = createtree(root, data);
+                }
+                break;
+                case 2: printf("\nInorder Traversal: \n");
+                inorder(root);
+                break;
+                case 3: printf("\nPreorder Traversal: \n");
+                preorder(root);
+                break;
+                case 4: printf("\nPostorder Traversal: \n");
+                postorder(root);
+                break;
+                case 5: printf("\nEnter the element to Search: ");
+                scanf("%d", &data);
+                root=search(root, data);
+                break;
+                case 6: exit(0);
+                default:printf("\nWrong Option");
+                break;
+                }
+                }
+                return 0;
+                }
+        </pre>
+
+    </section>
+
+    <section id="program11">
+        <h1>Program 11</h1>
+
+        <pre>
+                    #include<span><</span><span>stdio.h</span><span>></span>
+                    #include<span><</span><span>stdlib.h</span><span>></span>
+                    int n, a[20][20], visited1[20], visited2[20], source;
+                    void read_data( )
+                    {
+                    int i,j;
+                    printf("enter the number of nodes\n");
+                    scanf("%d",&n);
+                    printf("enter the adjacency matrix\n");
+                    for(i=0;i<samp><</samp>n;i++)
+                    for(j=0;j<samp><</samp>n;j++)
+                    scanf("%d",&a[i][j]);
+                    }
+                    void print_data(int visited[])
+                    {
+                    int i;
+                    for(i=0;i<samp><</samp>n;i++)
+                    {
+                    if(visited[i]==0)
+                    printf("\nvertex %d is not reachable\n",i);
+                    else
+                    printf("\nvertex %d is reachable\n",i);
+                    }
+                    }
+                    void BFS( )
+                    {
+                    int f = 0, r = 0, q[20], i, j;
+                    q[r]=source;
+                    visited1[source]=1;
+                    while(f<samp><</samp>=r)
+                    {
+                    i=q[f++];
+                    printf("--%d--",i);
+                    for(j=0;j<samp><</samp>n;j++)
+                    {
+                    if(a[i][j]==1 && visited1[j]==0)
+                    {
+                    visited1[j]=1;
+                    q[++r]=j;
+                    }
+                    }
+                    }
+                    }
+                    void DFS(int src, int *cnt)
+                    {
+                    int i, j;
+                    printf("--%d--",src);
+                    visited2[src]=1;
+                    for(j=0;j<samp><</samp>n;j++)
+                    {
+                    if(a[src][j]==1 && visited2[j]==0)
+                    {
+                    (*cnt)++;
+                    DFS(j,cnt);
+                    }
+                    }
+                    }
+                    int main( )
+                    {
+                    int i, choice, a,*count=<samp>&</samp>a;
+                    read_data( );
+                    printf("\t\t**ADJACENCY MATRIX FOR CITIES HAS CREATED SUCCESSFULLY**\n");
+                    while(1)
+                    {
+                    printf("\n1.BFS\n2.DFS\n3.Exit");
+                    printf("\nEnter Your Choice: ");
+                    scanf("%d",&choice);
+                    switch(choice)
+                    {
+                    case 1: for(i=0;i<samp><</samp>n;i++)
+                    visited1[i]=0;
+                    printf("Enter the source vertex between 0 to %d\n",n-1);
+                    scanf("%d",&source);
+                    BFS();
+                    print_data(visited1);
+                    break;
+                    case 2: for(i=0;i<samp><</samp>n;i++)
+                    visited2[i]=0;
+                    printf("Enter the source vertex between 0 to %d\n",n-1);
+                    scanf("%d",&source);
+                    a=0;
+                    DFS(source,count);
+                    print_data(visited2);
+                    if(*count==n-1)
+                    printf("graph is connected\n");
+                    else
+                    printf("graph is not connected\n");
+                    break;
+                    case 3: exit(0);
+                    default:printf("\nEnter proper Choice");
+                    }
+                    }
+                    return 0;
+                    }
+            </pre>
+    </section>
+
+    <section id="program12">
+        <h1>Program 12</h1>
+
+        <pre>
+                #include<span><</span><span>stdio.h</span><span>></span>
+                #include<span><</span><span>stdlib.h</span><span>></span>
+                #define MAX_ADDR 100
+                struct emmployee
+                {
+                int empid;
+                int age;
+                char name[20];
+                }ht[MAX_ADDR], temp;
+                int hash(int key) //Hash function to convert 4-digit-key to 2-digit index (Hash Address)
+                {
+                return key % MAX_ADDR;
+                }
+                int main( )
+                {
+                int n, i, index, count=0;
+                FILE *fp;
+                printf("Enter the number of Employees\n");
+                scanf("%d", &n);
+                fp = fopen("source.txt","w");
+                for(i=0; i<samp><</samp>n; i++)
+                {
+                printf("Enter the 4-digit key, age and name of an employee %d:\n", i+1);
+                scanf("%d", &temp.empid);
+                scanf("%d", &temp.age);
+                fflush(stdin);
+                gets(temp.name);
+                fprintf(fp, "%d\t%d\t%s\n", temp.empid, temp.age, temp.name);
+                }
+                fclose(fp);
+                //Initialize all the employee id in hash table ht to -1
+                for(i=0; i<samp><</samp>MAX_ADDR; i++)
+                ht[i].empid = -1;
+                // To store the records from file to hash table using remainder method of hashing
+                fp = fopen("source.txt", "r");
+                while(fscanf(fp, "%d%d%s", &temp.empid, &temp.age, temp.name)!=EOF)
+                {
+                if(count == MAX_ADDR)
+                {
+                printf("No space is available\n");
+                break;
+                }
+                index = hash(temp.empid);
+                if(ht[index].empid == -1) //Found free location (No Collision)
+                {
+                ht[index].empid = temp.empid;
+                ht[index].age = temp.age;
+                strcpy(ht[index].name, temp.name);
+                count++;
+                }
+                else //Collision Resolution (Linear Probing)
+                {
+                printf("Collision found for employee id %d\n", temp.empid);
+                for(i=1; i<samp><</samp>MAX_ADDR; i++) //start from 1
+                {
+                index = (hash(temp.empid) + i) % MAX_ADDR;
+                if(ht[index].empid == -1) //Found free location
+                {
+                ht[index].empid = temp.empid;
+                ht[index].age = temp.age;
+                strcpy(ht[index].name, temp.name);
+                count++;
+                printf("Collision Resolved for empid %d\n", temp.empid);
+                break;
+                }
+                }
+                }
+                }
+                fclose(fp);
+                printf("Hash Address \t Empid \t Age \t Name\n");
+                for(i=0; i<samp><</samp>MAX_ADDR;i++)
+                {
+                if(ht[i].empid != -1)
+                printf("%d\t%d\t%d\t%s\n", i, ht[i].empid, ht[i].age, ht[i].name);
+                }
+                return 0;
+                }
+        </pre>
+    </section>
+
+</body>
+
+</html>
