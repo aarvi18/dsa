@@ -10,12 +10,48 @@
 
 <body>
 
-    <div class="heading">
+    <style>
+        button {
+            top: 650px;
+            right: 50px;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            background-color: bisque;
+            border-radius: 5px;
+            text-decoration: none;
+            position: fixed;
+        }
+
+        button a {
+            text-decoration: none;
+            font-weight: 800;
+            color: #000;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+    </style>
+
+    <button>
+        <a href="#home">Press for go top ⬆</a>
+    </button>
+
+    <div class="heading" id="home">
         <h2>DSA PROGRAM</h2>
     </div>
 
     <div class="index">
         <ul>
+            <a href="#program1">
+                <li>Program 1</li>
+            </a>
+            <a href="#program2">
+                <li>Program 2</li>
+            </a>
+            <a href="#program3">
+                <li>Program 3</li>
+            </a>
+            <a href="#program4">
+                <li>Program 4</li>
+            </a>
             <a href="#program5a">
                 <li>Program 5a</li>
             </a>
@@ -45,6 +81,351 @@
             </a>
         </ul>
     </div>
+
+    <section id="program1">
+
+        <h1>Program 1</h1>
+
+        <pre>
+                #include<span><</span><span>stdio.h</span><span>></span>
+                #include<span><</span><span>stdlib.h</span><span>></span>
+                int a[20], N, ELEM, POS, i;
+                void create( );
+                void display( );
+                void insert( );
+                void delete_ele( );
+                int main( )
+                {
+                int choice;
+                while(1)
+                {
+                printf("\n\n----A PROGRAM TO PERFORM ARRAY OPERATIONS----");
+                printf("\n1.CREATE\n");
+                printf("2.DISPLAY\n");
+                printf("3.INSERT\n");
+                printf("4.DELETE\n");
+                printf("5.EXIT\n");
+                printf("-----------------------");
+                printf("\nENTER YOUR CHOICE:\t");
+                scanf("%d", &choice);
+                switch(choice)
+                {
+                case 1: create( ); break;
+                case 2: display( ); break;
+                case 3: insert( ); break;
+                case 4: delete_ele( ); break;
+                case 5: exit(0);
+                default: printf("\n Invalid choice:\n");
+                break;
+                }
+                }
+                return 0;
+                }
+                void create( )
+                {
+                printf("\nEnter the size of the array elements:\t");
+                scanf("%d", &N);
+                printf("\nEnter the elements for the array:\n");
+                for(i=0;i<samp><</samp> N; i++)
+                scanf("%d", &a[i]);
+                }
+                void display( )
+                {
+                if(N==0)
+                {
+                printf("\nArray is Empty-Nothing to Display\n");
+                return;
+                }
+                printf("\n The array elements are:\n");
+                for(i=0; i<samp><</samp>N; i++)
+                printf("%d\t", a[i]);
+                }
+                void insert( )
+                {
+                printf("\nEnter the position(between 1 and %d) to insert a new element:\t",N);
+                scanf("%d", &POS);
+                POS = POS-1;
+                if (POS>=0 && POS<samp><</samp>=N)
+                {
+                printf("\nEnter the element to be inserted :\t");
+                scanf("%d", &ELEM);
+                for(i=N-1;i>=POS; i--)
+                a[i+1]=a[i];
+                a[POS]=ELEM;
+                N=N+1;
+                }
+                }
+                void delete_ele( )
+                {
+                if(N==0)
+                {
+                printf("\nArray Empty - Deletion Not Possible\n");
+                return;
+                }
+                printf("\nEnter the position (between 1 and %d) of the element to be deleted:\t",N);
+                scanf("%d", &POS);
+                POS = POS-1;
+                if(POS>=0 && POS<samp><</samp>N)
+                {
+                ELEM=a[POS];
+                for(i=POS; i<samp><</samp>N-1;i++)
+                a[i]=a[i+1];
+                printf("\nThe deleted element is =%d\n", ELEM);
+                N = N-1;
+                }
+                }
+        </pre>
+    </section>
+
+    <section id="program2">
+
+        <h1>Program 2</h1>
+
+        <pre>
+                #include<span><</span><span>stdio.h</span><span>></span>
+                char STR[100],PAT[100],REP[100],ANS[100];
+                int temp, s, p, r, a, flag = 0;
+                void read( );
+                void replace( );
+                void print( );
+                int main( )
+                {
+                read( );
+                replace( );
+                print( );
+                return 0;
+                }
+                void read( )
+                {
+                printf("Enter the MAIN string: \n");
+                gets(STR);
+                printf("Enter a PATTERN string: \n");
+                gets(PAT);
+                printf("Enter a REPLACE string: \n");
+                gets(REP);
+                }
+                void replace ( )
+                {
+                temp = s = p = a = 0;
+                while ( STR[temp] != '\0')
+                {
+                // Checking for Match
+                if ( STR[s] == PAT[p] )
+                {
+                p++;
+                s++;
+                if ( PAT[p] == '\0')
+                {
+                //copy replace string in ans string
+                for(r = 0; REP[r] != '\0';r++, a++)
+                ANS[a] = REP[r];
+                flag=1;
+                p = 0;
+                temp = s;
+                }
+                }
+                else //Mismatch
+                {
+                ANS[a] = STR[temp];
+                temp++;
+                a++;
+                s = temp;
+                p = 0;
+                }
+                }
+                }
+                void print( )
+                {
+                if(flag==0)
+                printf("Pattern not found!!!\n”);
+                else
+                {
+                ANS[a] = '\0';
+                printf("\nThe RESULTANT string is:\n%s\n" ,ANS);
+                }
+                }
+        </pre>
+
+    </section>
+
+    <section id="program3">
+
+        <h1>Program 3</h1>
+
+        <pre>
+                #include<span><</span><span>stdio.h</span><span>></span>
+                #include<span><</span><span>stdlib.h</span><span>></span>
+                #include<span><</span><span>math.h</span><span>></span>
+                #define MAX 5
+                int s[MAX],top=-1,item;
+                int IsFull( )
+                {
+                if(top>=MAX-1)
+                return 1;
+                return 0;
+                }
+                int IsEmpty( )
+                {
+                if(top==-1)
+                return 1;
+                return 0;
+                }
+                void push(int item)
+                {
+                top++;
+                s[top]=item;
+                }
+                void pop( )
+                {
+                item=s[top];
+                top--;
+                }
+                void display( )
+                {
+                int i;
+                printf("\n the elements of the stack are");
+                for(i=top;i>=0;i--)
+                printf("\n %d",s[i]);
+                }
+                void check_pal( )
+                {
+                int num, temp, digit, revnum=0,k=0;
+                while(top!=-1)
+                pop( );
+                printf("\nenter the number\n");
+                scanf("%d",&num);
+                temp=num;
+                top=-1;
+                while(temp!=0)
+                {
+                digit=temp%10;
+                push(digit);
+                temp=temp/10;
+                }
+                while(top!=-1)
+                {
+                pop( );
+                revnum=item*pow(10,k)+revnum;
+                k=k+1;
+                }
+                printf("\nReverse of %d is %d\n",num,revnum);
+                if(num == revnum)
+                printf("The %d is Palindrome\n", num);
+                else
+                printf("The %d is not a Palindrome\n", num);
+                }
+                int main( )
+                {
+                int ch;
+                do
+                {
+                printf("\n1. Push \n2. Pop \n3. Display\n4. Check Palindrome\n5. Exit\n");
+                printf("\n Enter the choice: ");
+                scanf("%d",&ch);
+                switch(ch)
+                {
+                case 1: printf("\n Enter the element to be inserted:”);
+                scanf("%d",&item);
+                if(IsFull( ))
+                printf("Stack Overflow\n");
+                else
+                push(item);
+                break;
+                case 2: if(IsEmpty( ))
+                printf("Stack Underflow\n");
+                else
+                {
+                pop( );
+                printf("The item deleted is %d\n",item);
+                }
+                break;
+                case 3: if(IsEmpty( ))
+                printf("Stack is Empty\n");
+                else
+                display( );
+                break;
+                case 4: check_pal( );
+                break;
+                case 5: exit(0);
+                default:printf("Invalid choice: \n");
+                }
+                }while(ch!=5);
+                return 0;
+                }    
+        </pre>
+
+    </section>
+
+    <section id="program4">
+
+        <h1>Program 4</h1>
+
+        <pre>
+                #include<span><</span><span>stdio.h</span><span>></span>
+                #include<span><</span><span>ctype.h</span><span>></span>
+                #define SIZE 20
+                char s[SIZE];
+                int top = -1;
+                void push(char elem)
+                {
+                s[++top] = elem;
+                }
+                char pop( )
+                {
+                return (s[top--]);
+                }
+                int precedence(char elem) /* Function for precedence */
+                {
+                switch (elem)
+                {
+                case '#': return 0;
+                case '(': return 1;
+                case '+':
+                case '-': return 2;
+                case '*':
+                case '/':
+                case '%': return 3;
+                case '$':
+                case '^': return 4;
+                }
+                return elem;
+                }
+                int main( )
+                {
+                char infix[50], postfix[50], ch, elem;
+                int i = 0, k = 0;
+                printf("\n\nEnter the Infix Expression: ");
+                scanf("%s", infix);
+                push('#');
+                while ((ch = infix[i++]) != '\0')
+                {
+                if (ch == '(')
+                push(ch);
+                else if (isalnum(ch))
+                postfix[k++] = ch;
+                else if (ch == ')')
+                {
+                while (s[top] != '(')
+                postfix[k++] = pop();
+                elem = pop(); /* Remove ( */
+                }
+                else /* Operator */
+                {
+                while (precedence(s[top]) >= precedence(ch))
+                postfix[k++] = pop();
+                push(ch);
+                }
+                }
+                while (s[top] != '#') /* Pop from stack till empty */
+                postfix[k++] = pop();
+                postfix[k] = '\0'; /* Make pofx as valid string */
+                printf("\nGiven Infix Expression is: %s\n",infix);
+                printf("\nPostfix Expression is: %s\n", postfix);
+                }
+        </pre>
+
+    </section>
+
     <section id="program5a">
         <h1>Program 5a</h1>
 
